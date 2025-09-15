@@ -3,7 +3,7 @@
 [![conan Ubuntu](https://github.com/endurodave/IntegrationTestFrameworkDoctest/actions/workflows/cmake_clang.yml/badge.svg)](https://github.com/endurodave/IntegrationTestFrameworkDoctest/actions/workflows/cmake_clang.yml)
 [![conan Windows](https://github.com/endurodave/IntegrationTestFrameworkDoctest/actions/workflows/cmake_windows.yml/badge.svg)](https://github.com/endurodave/IntegrationTestFrameworkDoctest/actions/workflows/cmake_windows.yml)
 
-# Integration Test Framework using Doctest and Delegates
+# Integration Test Framework using doctest and Delegates
 
 An integration test framework used for testing multi-threaded C++ based projects using [doctest](https://github.com/doctest/doctest) and [DelegateMQ](https://github.com/endurodave/DelegateMQ) C++ asynchronous delegate libraries. All target devices are supported including Windows, Linux, and embedded systems.
 
@@ -14,7 +14,7 @@ See alternative implementations using different test frameworks:
 
 # Table of Contents
 
-- [Integration Test Framework using Doctest and Delegates](#integration-test-framework-using-doctest-and-delegates)
+- [Integration Test Framework using doctest and Delegates](#integration-test-framework-using-doctest-and-delegates)
 - [Table of Contents](#table-of-contents)
 - [Overview](#overview)
   - [References](#references)
@@ -112,15 +112,15 @@ As more integration tests are created, the product's executable image size incre
 
 Doctest was designed for a single-threaded environment. Its global state structures are not thread-safe, so doctest APIs must only be invoked from the `IntegrationTest` thread. Production code and callbacks into integration test modules must not call any doctest APIs.
 
-- doctest::Context object (controls test execution, command-line parsing, and reporters)
+- `doctest::Context` object (controls test execution, command-line parsing, and reporters)
 - Global registry of test cases and test suites
 - Current test result and active test case state
 - Reporters, loggers, and output streams
 - Command-line/test selection state
 
-To prevent cross-thread interference, all doctest features should only be accessed from the IntegrationTest thread (e.g., code inside test macros such as TEST_CASE, SUBCASE, and their associated setup/teardown).
+To prevent cross-thread interference, all doctest features should only be accessed from the `IntegrationTest` thread (e.g., code inside test macros such as `TEST_CASE`, `SUBCASE`, and their associated setup/teardown).
 
-Worker threads in your production code may run freely, but must not call any doctest assertions (CHECK, REQUIRE, etc.) or doctest APIs.
+Worker threads in your production code may run freely, but must not call any doctest assertions (`CHECK`, `REQUIRE`, etc.) or doctest APIs.
 
 # Delegates
 The DelegateMQ library offers both synchronous and asynchronous function invocation, typically utilized in two design patterns:
