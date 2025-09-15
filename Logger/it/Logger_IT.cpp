@@ -5,7 +5,7 @@
 //
 // All tests run within the IntegrationTest thread context. Logger subsystem runs 
 // within the Logger thread context. The Delegate library is used to invoke 
-// functions across thread boundaries. The Doctest library is used to execute 
+// functions across thread boundaries. The doctest library is used to execute 
 // tests and collect results.
 
 #include "Logger.h"
