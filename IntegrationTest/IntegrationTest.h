@@ -30,6 +30,7 @@ private:
 
     // Timer to start integration tests
     Timer m_timer;
+    dmq::ScopedConnection m_timerConnection;
 
     std::atomic<bool> m_complete = false;
 };
