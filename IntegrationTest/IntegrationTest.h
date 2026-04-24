@@ -26,10 +26,10 @@ private:
     void Run();
 
     // The integration test worker thread that executes Doctest
-    Thread m_thread;
+    dmq::os::Thread m_thread;
 
     // Timer to start integration tests
-    Timer m_timer;
+    dmq::util::Timer m_timer;
     dmq::ScopedConnection m_timerConnection;
 
     std::atomic<bool> m_complete = false;
