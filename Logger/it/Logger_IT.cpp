@@ -119,7 +119,7 @@ TEST_CASE("Logger_IT - FlushTime")
 	// Clear the m_msgData list on Logger thread
 	auto retVal1 = MakeDelegate(
 		&Logger::GetInstance().m_logData.m_msgData,	// Object instance
-		&std::list<std::string>::clear,				// Object function
+		(void (std::list<std::string>::*)() noexcept)&std::list<std::string>::clear,				// Object function
 		Logger::GetInstance(),						// Thread to invoke object function
 		milliseconds(50)).AsyncInvoke();
 
@@ -185,7 +185,7 @@ TEST_CASE("Logger_IT - FlushTimeSimplified")
 	// Clear the m_msgData list on Logger thread
 	auto retVal1 = AsyncInvoke(
 		&Logger::GetInstance().m_logData.m_msgData,	// Object instance
-		&std::list<std::string>::clear,				// Object function
+		(void (std::list<std::string>::*)() noexcept)&std::list<std::string>::clear,				// Object function
 		Logger::GetInstance(),						// Thread to invoke object function
 		milliseconds(50));							// Wait up to 50mS for async invoke
 
@@ -252,7 +252,7 @@ TEST_CASE("Logger_IT - FlushTimeSimplifiedWithLambda")
 	// Clear the m_msgData list on Logger thread
 	auto retVal1 = AsyncInvoke(
 		&Logger::GetInstance().m_logData.m_msgData,	// Object instance
-		&std::list<std::string>::clear,				// Object function
+		(void (std::list<std::string>::*)() noexcept)&std::list<std::string>::clear,				// Object function
 		Logger::GetInstance(),						// Thread to invoke object function
 		milliseconds(50));							// Wait up to 50mS for async invoke
 
@@ -294,3 +294,4 @@ TEST_CASE("Logger_IT - FlushTimeSimplifiedWithLambda")
 
 // Dummy function to force linker to keep the code in this file
 void Logger_IT_ForceLink() { }
+

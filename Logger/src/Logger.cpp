@@ -167,8 +167,9 @@ bool Logger::IsCurrentThread()
 // DispatchDelegate
 //----------------------------------------------------------------------------
 #ifdef IT_ENABLE
-void Logger::DispatchDelegate(std::shared_ptr<dmq::DelegateMsg> msg)
+bool Logger::DispatchDelegate(std::shared_ptr<dmq::DelegateMsg> msg)
 {
+    if (!m_thread) return false;
     ASSERT_TRUE(m_thread);
 
     // Create a new ThreadMsg
@@ -178,6 +179,7 @@ void Logger::DispatchDelegate(std::shared_ptr<dmq::DelegateMsg> msg)
     std::unique_lock<std::mutex> lk(m_mutex);
     m_queue.push(threadMsg);
     m_cv.notify_one();
+    return true;
 }
 #endif
 
@@ -299,4 +301,5 @@ void Logger::Process()
         }
     }
 }
+
 
